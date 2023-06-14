@@ -29,3 +29,19 @@ kombo2 = [(x, y) for x in range(1, 10) for y in range(1, 10)]
 print(kombo2)
 kombo3 = [[x[0], x[1]] for x in kombo2]
 print(kombo3)
+
+matrix = [[1, 2, 3, 4],
+          [5, 6, 7, 8],
+          [9, 10, 11, 12]]
+
+# reshaped_matrix = [[row[i] for row in matrix] for i in range(4)]
+
+resh_matrix = [
+    [
+        [y for x in matrix for y in x][i * len(matrix) + j]
+        for j in range(len(matrix))
+    ]
+    for i in range(len(matrix[0]))
+]
+
+print(resh_matrix)

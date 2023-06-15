@@ -5,17 +5,17 @@ class StandardPolicy:
 
     @staticmethod
     def deposit(account, amount):
-        account.balance += amount
+        account._balance += amount
 
     @staticmethod
     def withdraw(account, amount):
-        if account.balance < amount:
+        if account._balance < amount:
             raise ValueError('Insufficient balance')
-        account.balance -= amount
+        account._balance -= amount
 
     @staticmethod
     def inquiry(account):
-        return account.balance
+        return account._balance
 
 
 class Account:
@@ -23,7 +23,7 @@ class Account:
 
     def __init__(self, name, balance, policy=StandardPolicy):
         self.name = name
-        self.balance = balance
+        self._balance = balance
         self.policy = policy
         Account.num_accounts += 1
 
@@ -32,6 +32,20 @@ class Account:
         from xml.etree.ElementTree import XML
         doc = XML(data)
         return cls(doc.findtext('name'), float(doc.findtext('balance')))
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if not isinstance(value, str):
+            raise TypeError('Name must be a string')
+        if not 4 <= len(value) <= 10:
+            raise ValueError('Name must be between 4 and 10 characters long')
+        # if not value.isalnum():
+        #     raise ValueError('Name must be alphanumeric')
+        self._name = value
 
     def deposit(self, amount):
         self.policy.deposit(self, amount)
@@ -43,7 +57,7 @@ class Account:
         return self.policy.inquiry(self)
 
     def __str__(self):
-        return f'Account({self.policy} - {self.name}, {self.balance})'
+        return f'Account({self.policy} - {self.name}, {self._balance})'
 
     def __repr__(self):
         return str(self)
@@ -75,6 +89,11 @@ print(acc)
 acc.deposit(100)
 print(acc)
 
-hp = Account("Zenon", 1000, HackPolicy)
-hp.deposit(100)
-print(hp)
+nk = Account("Zenon", 1000)
+nk.deposit(100)
+print(nk)
+
+
+# hp = Account("Zenon", 1000, HackPolicy)
+# hp.deposit(100)
+# print(hp)

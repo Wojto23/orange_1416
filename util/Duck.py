@@ -26,23 +26,32 @@ class Cyclist:
         return "Cyclist pedal"
 
 
-class LoudMixin:
+# class NoiseMixin:
+#     def noise(self):
+#         raise NotImplementedError("Subclass must implement noise method")
+
+
+class LoudMixin():
     def noise(self):
         return super().noise().upper()
 
 
-class AnnoyingMixin:
+class AnnoyingMixin():
     def noise(self):
         return 3 * super().noise()
+
 
 class LoudDuck(LoudMixin, Duck):
     pass
 
+
 class AnnoyingDog(AnnoyingMixin, Dog):
     pass
 
+
 class LoudCyclist(LoudMixin, Cyclist):
     pass
+
 
 d = LoudDuck()
 print(d.noise())

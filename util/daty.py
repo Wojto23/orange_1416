@@ -17,3 +17,24 @@ class Date:
     @classmethod
     def today(cls):
         return cls.from_timestamp(time.time())
+
+class EuroDate(Date):
+    datefmt = '{day:02d}.{month:02d}.{year}'
+
+class USDate(Date):
+    datefmt = '{month:02d}/{day:02d}/{year}'
+
+d = Date(2012, 12, 21)
+d1 = Date.today()
+print(d1)
+print(d)
+e = EuroDate(2012, 12, 21)
+e1 = EuroDate.today()
+print(e)
+print(e1)
+u = USDate(2012, 12, 21)
+u1 = USDate.today()
+print(u)
+print(u1)
+
+print(USDate.mro())

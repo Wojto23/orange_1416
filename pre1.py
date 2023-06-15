@@ -2,7 +2,6 @@ import argparse
 import configparser
 import sys
 
-
 def main(number, other_number, output):
     result = number + other_number
     print("Result: ", result, file=output)

@@ -2,6 +2,9 @@ import random
 
 
 class StandardPolicy:
+    """
+    Standard policy for accounts
+    """
 
     @staticmethod
     def deposit(account, amount):
@@ -15,6 +18,11 @@ class StandardPolicy:
 
     @staticmethod
     def inquiry(account):
+        """
+        Pobiernie stanu konta
+        :param account: klasa Account
+        :return: stan konta
+        """
         return account.balance
 
 
@@ -40,6 +48,11 @@ class Account:
         self.policy.withdraw(self, amount)
 
     def inquiry(self):
+        """
+        Pobiernie stanu konta
+        :param account: klasa Account
+        :return: stan konta
+        """
         return self.policy.inquiry(self)
 
     def __str__(self):
@@ -75,6 +88,7 @@ print(acc)
 acc.deposit(100)
 print(acc)
 
-hp = Account("Zenon", 1000, HackPolicy)
+hp = Account("Zenon", 1000, StandardPolicy)
 hp.deposit(100)
+hp.inquiry()
 print(hp)
